@@ -181,13 +181,11 @@ import React, { useState, useEffect, useRef } from "react";
 import QrScanner from "qr-scanner";
 import "./App.css";
 import scannerGif from "./assets/qr-code.gif";
-import { ClipLoader } from "react-spinners"; 
 
 function App() {
   const [scanResult, setScanResult] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [spinnerVisibility,setSpinnerVisibility]=useState(false);
 
   const videoRef = useRef(null);
 
@@ -201,7 +199,6 @@ function App() {
         (result) => {
           setScanResult(result.data);
           setIsScanning(false);
-          setSpinnerVisibility(false);
         },
         {
           returnDetailedScanResult: true,
@@ -234,7 +231,6 @@ function App() {
     QrScanner.scanImage(file, { returnDetailedScanResult: true })
       .then((result) => {
         setScanResult(result.data);
-        setSpinnerVisibility(false);
         setErrorMessage(""); // Clear any previous errors
       })
       .catch((err) => {
@@ -282,7 +278,7 @@ function App() {
 
           <button
             className="btn btn-danger"
-            onClick={() => {setIsScanning(false);setSpinnerVisibility(false)}}
+            onClick={() => setIsScanning(false)}
             style={{ marginTop: "15px" }}
           >
             Cancel Scan
@@ -311,7 +307,6 @@ function App() {
               onClick={() => {
                 setErrorMessage("");
                 setIsScanning(true);
-                setSpinnerVisibility(true);
               }}
             >
               Start Camera Scanner
