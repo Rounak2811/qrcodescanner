@@ -181,6 +181,7 @@ import React, { useState, useEffect, useRef } from "react";
 import QrScanner from "qr-scanner";
 import "./App.css";
 import scannerGif from "./assets/qr-code.gif";
+import QrScannerApp from "./QrScannerApp.jsx";
 
 function App() {
   const [scanResult, setScanResult] = useState(null);
@@ -227,7 +228,6 @@ function App() {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Use the static method scanImage directly on the imported class
     QrScanner.scanImage(file, { returnDetailedScanResult: true })
       .then((result) => {
         setScanResult(result.data);
@@ -238,48 +238,35 @@ function App() {
         setErrorMessage("No QR code found in that image. Please try another.");
       });
 
-    // Reset the input so the same file can be uploaded again if needed
     e.target.value = "";
   };
 
   return (
-    <section id="center" style={{ textAlign: "center", padding: "20px" }}>
-      <h1>Scan QR Code - Get the Information</h1>
+    <section id="center" className="text-center p-2">
+      <marquee className="bg-primary bg-gradient text-white mb-5">
+        Metro Railways, Kolkata
+      </marquee>
+      <h1 className="text-primary">Scan QR Code - Get the Information</h1>
 
       {errorMessage && (
-        <div style={{ color: "red", marginBottom: "15px", fontWeight: "bold" }}>
-          {errorMessage}
-        </div>
+        <div className="text-red mb-3 text-bold">{errorMessage}</div>
       )}
 
       {scanResult ? (
-        <div className="result-container">
-          <h2>Scan Successful!</h2>
-          <p style={{ fontSize: "1.2rem", wordBreak: "break-all" }}>
-            <strong>Result:</strong> {scanResult}
-          </p>
-          <button
-            className="btn btn-secondary"
-            onClick={() => {
-              setScanResult(null);
-              setErrorMessage("");
-            }}
-            style={{ marginTop: "15px" }}
-          >
-            Scan Another Code
-          </button>
-        </div>
+        <QrScannerApp
+          scanResult={scanResult}
+          resetScanner={() => {
+            setScanResult(null);
+            setErrorMessage("");
+          }}
+        />
       ) : isScanning ? (
-        <div style={{ maxWidth: "500px", margin: "0 auto" }}>
-          <video
-            ref={videoRef}
-            style={{ width: "100%", borderRadius: "8px" }}
-          ></video>
+        <div className="mw-50 my-auto">
+          <video ref={videoRef} className="w-100 rounded-4"></video>
 
           <button
-            className="btn btn-danger"
+            className="btn btn-danger mt-4"
             onClick={() => setIsScanning(false)}
-            style={{ marginTop: "15px" }}
           >
             Cancel Scan
           </button>
@@ -289,19 +276,13 @@ function App() {
           <img
             src={scannerGif}
             alt="Scanner"
-            style={{ width: "250px", height: "auto", margin: "20px 0" }}
+            height={200}
+            width={200}
+            
           />
           <br />
 
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "15px",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
+          <div className="d-flex flex-wrap gap-3 align-items-center justify-content-center m-4">
             <button
               className="btn btn-primary"
               onClick={() => {
