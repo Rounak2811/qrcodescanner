@@ -5,7 +5,7 @@ function ResetButton({ resetScanner }) {
       className="btn btn-primary m-3 bg-gradient shadow"
       onClick={resetScanner}
     >
-      Go To Scanner Again
+      Scan Again
     </button>
   );
 }

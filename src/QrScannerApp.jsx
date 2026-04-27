@@ -55,8 +55,8 @@ const QrScannerApp = ({ scanResult, resetScanner }) => {
       {loading && (
         <div className="text-primary text-center">
           <h3 className="blue">Verifying Ticket with Server...</h3>
-          <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       )}

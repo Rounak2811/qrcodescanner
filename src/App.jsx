@@ -238,13 +238,13 @@ function App() {
         setErrorMessage("No QR code found in that image. Please try another.");
       });
 
-    e.target.value = "";
+    e.target.value = ""; 
   };
 
   return (
-    <section id="center" className="text-center p-2">
-      <marquee className="bg-primary bg-gradient text-white mb-5">
-        Metro Railways, Kolkata
+    <section id="center" className="text-center mx-auto  p-2">
+      <marquee className="bg-primary bg-gradient text-white fs-3">
+        Kolkata Metro Railways
       </marquee>
       <h1 className="text-primary">Scan QR Code - Get the Information</h1>
 
@@ -261,8 +261,8 @@ function App() {
           }}
         />
       ) : isScanning ? (
-        <div className="mw-50 my-auto">
-          <video ref={videoRef} className="w-100 rounded-4"></video>
+        <div className="m-auto" style={{ width: "350px" }}>
+          <video ref={videoRef} className="w-100 rounded-4 shadow"></video>
 
           <button
             className="btn btn-danger mt-4"
@@ -273,13 +273,7 @@ function App() {
         </div>
       ) : (
         <div>
-          <img
-            src={scannerGif}
-            alt="Scanner"
-            height={200}
-            width={200}
-            
-          />
+          <img src={scannerGif} alt="Scanner" height={200} width={200} />
           <br />
 
           <div className="d-flex flex-wrap gap-3 align-items-center justify-content-center m-4">
